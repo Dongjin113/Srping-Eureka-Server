@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: eureka
+
+server:
+  port: 8200
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8200/eureka/ #,http://localhost:8201/eureka/,http://localhost:8202/eureka/
+# 서비스에서 8200번 eureka 서버에 등록하면, 8201번 유레카서버와, 8202번 유레카 서버끼리 서로 소통하면서 인스턴스를 공유
+
+management:
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+    prometheus:
+      enabled: true
+  server:
+    port: 8299   # 원하는 포트 번호로 설정하세요.
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /monitoring   # 원하는 경로로 설정하세요.
+      exposure:
+        include: "info, health, prometheus"
+    jmx:
+      exposure:
+        exclude: "*"
+
